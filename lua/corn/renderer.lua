@@ -57,14 +57,17 @@ end
 
 M.setup = function()
   M.bufnr = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_set_option_value("undolevels", -1, {  buf = M.bufnr })
+
   M.ns = vim.api.nvim_create_namespace('corn')
 end
 
-M.set_state = function(state)
-  if state ~= nil then
-    M.state = state
+M.toggle = function(state)
+  if state == nil then
+    M.state = not M.state
   else
-    M.state = M.state
+    if state == M.state then return end
+    M.state = state
   end
 
   config.opts.on_toggle(M.state)

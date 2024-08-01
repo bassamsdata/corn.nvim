@@ -19,17 +19,17 @@ require 'corn'.setup()
 
 ## Use
 ```lua
-require 'corn'.toggle(state?)       -- toggle visiblity
-require 'corn'.scope(scope_type)    -- change scope type
+require 'corn'.toggle(state?)       -- toggle visiblity (true, false)
+require 'corn'.scope(scope_type)    -- change scope type ("line", "file")
 require 'corn'.scope_cycle()        -- cycle scope type
 require 'corn'.render()             -- manually invoke the renderer
 ```
 or their vim cmds
 ```
-:CornToggle [on | off]
-:CornScope
-:CornScopeCycle
-:CornRender
+:Corn toggle [on|off]
+:Corn scope <file|line>
+:Corn scope_cycle
+:Corn render
 ```
 
 ## Config
@@ -50,6 +50,13 @@ require 'corn'.setup {
 
   -- sets which vim modes corn isn't allowed to render in, should contain strings like 'n', 'i', 'v', 'V' .. etc
   blacklisted_modes = {},
+
+  -- sets which severity corn isn't allowed to render in, should contain diagnostic severities like:
+  -- vim.diagnostic.severity.HINT
+  -- vim.diagnostic.severity.INFO
+  -- vim.diagnostic.severity.WARN
+  -- vim.diagnostic.severity.ERROR
+  blacklisted_severities = {},
 
   -- highlights to use for each diagnostic severity level
   highlights = {
